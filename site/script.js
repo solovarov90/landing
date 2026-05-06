@@ -157,20 +157,33 @@ document.addEventListener('DOMContentLoaded', () => {
     let scrollLeft;
     let isHovering = false;
     let hasDragged = false;
-    let speed = track.classList.contains('reverse') ? -0.8 : 0.8;
+    let speed = track.classList.contains('reverse') ? -0.7 : 0.7;
     
-    // Init reverse track
-    if (speed < 0) {
-      setTimeout(() => { track.scrollLeft = track.scrollWidth / 2; }, 100);
-    }
+    // Init track positions to ensure seamless start
+    const initMarquee = () => {
+      if (speed < 0) {
+        track.scrollLeft = track.scrollWidth / 2;
+      } else {
+        track.scrollLeft = 0;
+      }
+    };
+    
+    // Run after a small delay to ensure rendering
+    setTimeout(initMarquee, 100);
     
     const autoScroll = () => {
       if (!isDown && !isHovering) {
         track.scrollLeft += speed;
-        if (speed > 0 && track.scrollLeft >= track.scrollWidth / 2) {
-          track.scrollLeft = 0;
-        } else if (speed < 0 && track.scrollLeft <= 0) {
-          track.scrollLeft = track.scrollWidth / 2;
+        
+        // Endless wrap logic
+        if (speed > 0) {
+          if (track.scrollLeft >= track.scrollWidth / 2) {
+            track.scrollLeft = 0;
+          }
+        } else {
+          if (track.scrollLeft <= 0) {
+            track.scrollLeft = track.scrollWidth / 2;
+          }
         }
       }
       requestAnimationFrame(autoScroll);
