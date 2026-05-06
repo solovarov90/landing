@@ -134,17 +134,20 @@ document.addEventListener('DOMContentLoaded', () => {
     if (e.key === 'Escape') closeLightbox();
   });
 
-  /* ---------- Video Hover Play ---------- */
-  document.querySelectorAll('.bento-item').forEach(item => {
-    const video = item.querySelector('video');
-    if (!video) return;
+  /* ---------- Video Scroll Play ---------- */
+  const videoObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      const video = entry.target;
+      if (entry.isIntersecting) {
+        video.play().catch(() => {});
+      } else {
+        video.pause();
+      }
+    });
+  }, { threshold: 0.5 });
 
-    item.addEventListener('mouseenter', () => {
-      video.play().catch(() => {});
-    });
-    item.addEventListener('mouseleave', () => {
-      video.pause();
-    });
+  document.querySelectorAll('video').forEach(video => {
+    videoObserver.observe(video);
   });
 
   /* ---------- Marquee Endless Drag & Scroll ---------- */
