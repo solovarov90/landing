@@ -272,9 +272,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
         placeholder.dataset.loaded = "true";
         const iframe = document.createElement('iframe');
-        // Switched to youtube.com and added origin param to fix Error 153
-        iframe.setAttribute('src', `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&rel=0&controls=1&modestbranding=1&enablejsapi=1&origin=${window.location.origin}`);
+        
+        // Handle file:// protocol for local testing
+        const origin = window.location.protocol === 'file:' ? 'http://localhost' : window.location.origin;
+        
+        iframe.setAttribute('src', `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&rel=0&enablejsapi=1&origin=${origin}`);
         iframe.setAttribute('frameborder', '0');
+
 
         iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share');
         iframe.setAttribute('referrerpolicy', 'strict-origin-when-cross-origin');
