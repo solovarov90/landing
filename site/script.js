@@ -144,11 +144,12 @@ document.addEventListener('DOMContentLoaded', () => {
         video.pause();
       }
     });
-  }, { threshold: 0.5 });
+  }, { threshold: 0.2 }); // Lower threshold for faster trigger in sliders
 
   document.querySelectorAll('video').forEach(video => {
     videoObserver.observe(video);
   });
+
 
   /* ---------- Marquee Endless Drag & Scroll ---------- */
   document.querySelectorAll('.marquee-track').forEach(track => {
@@ -260,5 +261,71 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   });
+
+  /* ---------- YouTube Auto-Load & Play on Scroll ---------- */
+  const ytObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const placeholder = entry.target;
+        const videoId = placeholder.dataset.videoId;
+        if (!videoId || placeholder.dataset.loaded) return;
+
+        placeholder.dataset.loaded = "true";
+        const iframe = document.createElement('iframe');
+        // Autoplay+Mute for bypass browser blocks
+        iframe.setAttribute('src', `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&mute=1&rel=0&controls=0&modestbranding=1&enablejsapi=1`);
+        iframe.setAttribute('frameborder', '0');
+        iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share');
+        iframe.setAttribute('referrerpolicy', 'strict-origin-when-cross-origin');
+        iframe.setAttribute('allowfullscreen', '1');
+        iframe.style.width = '100%';
+        iframe.style.height = '100%';
+        iframe.style.position = 'absolute';
+        iframe.style.top = '0';
+        iframe.style.left = '0';
+        iframe.style.borderRadius = '12px';
+        iframe.style.pointerEvents = 'none'; // Keep it non-interactive for smooth scroll
+
+        placeholder.style.padding = '0';
+        placeholder.innerHTML = '';
+        placeholder.appendChild(iframe);
+        
+        // Remove text and play icon if they were there
+        placeholder.style.background = '#000';
+      }
+    });
+  }, { threshold: 0.3 });
+
+  document.querySelectorAll('.yt-placeholder').forEach(p => ytObserver.observe(p));
+  
+  /* ---------- Mobile Auto-Slider ---------- */
+  if (window.innerWidth <= 768) {
+    const sliders = document.querySelectorAll('.steps-grid, .case-scroll');
+    sliders.forEach(slider => {
+      let scrollAmount = 0;
+      let scrollStep = 1; // pixels
+      let isInteracting = false;
+      
+      const step = () => {
+        if (!isInteracting) {
+          slider.scrollLeft += scrollStep;
+          // Loop back
+          if (slider.scrollLeft >= (slider.scrollWidth - slider.clientWidth - 1)) {
+            slider.scrollLeft = 0;
+          }
+        }
+        requestAnimationFrame(step);
+      };
+      
+      // Stop on touch
+      slider.addEventListener('touchstart', () => isInteracting = true);
+      slider.addEventListener('touchend', () => {
+        setTimeout(() => isInteracting = false, 3000); // Resume after 3s
+      });
+      
+      requestAnimationFrame(step);
+    });
+  }
+
 
 });
