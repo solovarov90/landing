@@ -272,9 +272,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
         placeholder.dataset.loaded = "true";
         const iframe = document.createElement('iframe');
-        // Autoplay+Mute for bypass browser blocks
-        iframe.setAttribute('src', `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&mute=1&rel=0&controls=0&modestbranding=1&enablejsapi=1`);
+        // Switched to youtube.com and added origin param to fix Error 153
+        iframe.setAttribute('src', `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&rel=0&controls=1&modestbranding=1&enablejsapi=1&origin=${window.location.origin}`);
         iframe.setAttribute('frameborder', '0');
+
         iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share');
         iframe.setAttribute('referrerpolicy', 'strict-origin-when-cross-origin');
         iframe.setAttribute('allowfullscreen', '1');
