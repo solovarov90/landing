@@ -1341,7 +1341,7 @@ a {
   .steps-grid {
     display: flex;
     overflow-x: auto;
-    scroll-snap-type: x mandatory;
+    scroll-snap-type: x proximity;
     gap: 16px;
     padding: 0 24px 24px;
     margin: 32px -24px 0;
@@ -1903,6 +1903,111 @@ a {
   }
   .cta-card {
     padding: 48px 24px;
+  }
+}
+
+
+/* --- Mobile Centering Fix --- */
+@media (max-width: 768px) {
+  .hero {
+    padding-top: 80px !important;
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+  .hero-title {
+    font-size: 32px !important;
+    text-align: center !important;
+  }
+  .hero-prose, .hero-prose p, .hero-prose div, .prose-text-fade, .prose-text-large {
+    text-align: center !important;
+  }
+  .prose-quote {
+    border-left: none !important;
+    border-top: 1px solid var(--accent-violet);
+    border-bottom: 1px solid var(--accent-violet);
+    padding: 24px 0 !important;
+    text-align: center !important;
+    margin: 20px 0 !important;
+  }
+  .hero-cta-group {
+    flex-direction: column;
+    width: 100%;
+  }
+  .btn-primary, .btn-secondary {
+    width: 100%;
+    text-align: center;
+  }
+  .hero-ticker {
+    gap: 16px !important;
+    padding: 16px !important;
+  }
+  .ticker-divider {
+    display: none;
+  }
+}
+
+
+/* --- Case Scroll Snap Effect --- */
+.case-scroll {
+  display: flex !important;
+  gap: 20px !important;
+  overflow-x: auto !important;
+  scroll-snap-type: x mandatory !important; /* Включаем примагничивание */
+  scroll-behavior: smooth !important;
+  -webkit-overflow-scrolling: touch !important;
+  padding-bottom: 30px !important;
+}
+
+.case-scroll .bento-item {
+  flex: 0 0 85vw !important; /* Карточка на 85% ширины экрана */
+  scroll-snap-align: center !important; /* Центрируем при переключении */
+  height: auto !important;
+}
+
+@media (min-width: 769px) {
+  .case-scroll .bento-item {
+    flex: 0 0 400px !important;
+    scroll-snap-align: start !important;
+  }
+}
+
+
+/* --- Fixed Case Scroll --- */
+.case-scroll {
+  display: flex !important;
+  gap: 20px !important;
+  overflow-x: auto !important;
+  scroll-snap-type: x mandatory !important;
+  scroll-behavior: smooth !important;
+  padding: 10px 0 30px !important;
+  width: 100% !important;
+}
+.case-scroll .bento-item {
+  flex: 0 0 90% !important;
+  min-height: 450px !important; /* Увеличили высоту */
+  scroll-snap-align: center !important;
+  border-radius: 24px !important;
+}
+.case-scroll .bento-item img, .case-scroll .bento-item video {
+  height: 450px !important;
+  width: 100% !important;
+  object-fit: cover !important;
+}
+
+
+/* --- Desktop Case Scroll Fix --- */
+@media (min-width: 769px) {
+  .case-scroll {
+    gap: 32px !important;
+    padding: 40px 0 !important;
+  }
+  .case-scroll .bento-item {
+    flex: 0 0 380px !important; /* Делаем карточки компактнее на десктопе */
+    min-height: 500px !important;
+    scroll-snap-align: start !important;
+  }
+  .case-scroll .bento-item img, .case-scroll .bento-item video {
+    height: 500px !important;
   }
 }
 

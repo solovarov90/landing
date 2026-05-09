@@ -303,34 +303,34 @@ document.addEventListener('DOMContentLoaded', () => {
 
   document.querySelectorAll('.yt-placeholder').forEach(p => ytObserver.observe(p));
   
-  /* ---------- Mobile Auto-Slider ---------- */
-  if (window.innerWidth <= 768) {
-    const sliders = document.querySelectorAll('.steps-grid, .case-scroll');
-    sliders.forEach(slider => {
-      let scrollAmount = 0;
-      let scrollStep = 1; // pixels
-      let isInteracting = false;
-      
-      const step = () => {
-        if (!isInteracting) {
-          slider.scrollLeft += scrollStep;
-          // Loop back
-          if (slider.scrollLeft >= (slider.scrollWidth - slider.clientWidth - 1)) {
-            slider.scrollLeft = 0;
-          }
-        }
-        requestAnimationFrame(step);
-      };
-      
-      // Stop on touch
-      slider.addEventListener('touchstart', () => isInteracting = true);
-      slider.addEventListener('touchend', () => {
-        setTimeout(() => isInteracting = false, 3000); // Resume after 3s
+  /* ---------- Conversion Tracking ---------- */
+  const trackConversion = (eventName, platform) => {
+    if (typeof gtag === 'function') {
+      gtag('event', eventName, {
+        'event_category': 'engagement',
+        'event_label': platform
       });
-      
-      requestAnimationFrame(step);
-    });
-  }
+    }
+    if (typeof fbq === 'function') {
+      fbq('track', eventName === 'generate_lead' ? 'Lead' : 'Contact', {
+        content_name: platform
+      });
+    }
+  };
 
+  // Track Consultation (Path 1)
+  document.querySelectorAll('a[href*="/join/v1"]').forEach(link => {
+    link.addEventListener('click', () => trackConversion('generate_lead', 'Consultation'));
+  });
+
+  // Track System "Under Key" (Path 2)
+  document.querySelectorAll('a[href*="/join/v2"]').forEach(link => {
+    link.addEventListener('click', () => trackConversion('purchase_inquiry', 'System_Under_Key'));
+  });
+
+  // Track Telegram Join
+  document.querySelectorAll('a[href*="/join/channel"]').forEach(link => {
+    link.addEventListener('click', () => trackConversion('join_group', 'Telegram_Channel'));
+  });
 
 });
