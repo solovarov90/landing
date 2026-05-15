@@ -312,7 +312,7 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     }
     if (typeof fbq === 'function') {
-      fbq('track', eventName === 'generate_lead' ? 'Lead' : 'Contact', {
+      fbq('track', 'ViewContent', {
         content_name: platform
       });
     }
