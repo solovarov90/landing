@@ -333,4 +333,15 @@ document.addEventListener('DOMContentLoaded', () => {
     link.addEventListener('click', () => trackConversion('join_group', 'Telegram_Channel'));
   });
 
+  // Track Tariffs (Старт / PRO / VIP)
+  document.querySelectorAll('a[href*="/join/t0"]').forEach(link => {
+    link.addEventListener('click', () => trackConversion('select_tariff', 'Tariff_Start'));
+  });
+  document.querySelectorAll('a[href*="/join/t1"]').forEach(link => {
+    link.addEventListener('click', () => trackConversion('select_tariff', 'Tariff_PRO'));
+  });
+  document.querySelectorAll('a[href*="/join/t2"]').forEach(link => {
+    link.addEventListener('click', () => trackConversion('select_tariff', 'Tariff_VIP'));
+  });
+
 });

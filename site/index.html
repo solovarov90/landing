@@ -684,10 +684,90 @@
         </div>
     </section>
 
+    <!-- TARIFFS / PRODUCT PRICING -->
+    <style>
+      .tariffs-grid { grid-template-columns: repeat(3, 1fr); align-items: stretch; }
+      .tariffs-grid .pricing-card { position: relative; }
+      .tariff-badge { position: absolute; top: -13px; left: 50%; transform: translateX(-50%); background: var(--accent-violet); color: #fff; font-size: 12px; font-weight: 700; letter-spacing: .3px; padding: 5px 16px; border-radius: 999px; white-space: nowrap; }
+      .tariffs-grid .tariff-tagline { font-size: 15px; color: var(--text-secondary); line-height: 1.6; margin-bottom: 24px; }
+      .tariffs-grid .pricing-features { list-style: none; padding: 0; margin: 0; text-align: left; }
+      .tariffs-grid .pricing-features li { font-size: 14px; color: var(--text-secondary); line-height: 1.5; margin-bottom: 11px; padding-left: 26px; position: relative; }
+      .tariffs-grid .pricing-features li::before { content: "\2713"; position: absolute; left: 0; top: 0; color: var(--accent-violet); font-weight: 700; }
+    </style>
+    <section id="tariffs" class="section" style="padding-bottom: 0;">
+        <div class="container reveal">
+            <div class="section-label">06 // Тарифы</div>
+            <h2 class="section-title">Сколько стоит твоя контент-машина</h2>
+            <div class="prose-text mb-48 text-center" style="max-width: 760px; margin: 0 auto 56px;">
+                <p>Три уровня. Начни бесплатно — система сама покажет, на что способна. А дальше выбираешь, насколько глубоко её подключить.</p>
+            </div>
+
+            <div class="pricing-grid tariffs-grid">
+                <!-- СТАРТ -->
+                <div class="pricing-card">
+                    <div class="pricing-header">
+                        <h3>Старт</h3>
+                        <div class="price">Бесплатно</div>
+                    </div>
+                    <div class="pricing-body">
+                        <p class="tariff-tagline">Зайди и попробуй руками. Бесплатный доступ с функционалом «Старт» — чтобы пощупать систему изнутри.</p>
+                        <ul class="pricing-features">
+                            <li>ИИ-помощник и генерация постов</li>
+                            <li>1 пост в день, 1 канал</li>
+                            <li>Обучение прямо внутри</li>
+                        </ul>
+                    </div>
+                    <a href="https://smart-posting.ru/join/t0" class="btn-secondary full-width">Попробовать бесплатно</a>
+                </div>
+
+                <!-- PRO -->
+                <div class="pricing-card highlighted">
+                    <div class="tariff-badge">🔥 Хит продаж</div>
+                    <div class="pricing-header">
+                        <h3>PRO</h3>
+                        <div class="price">10 000 ₽ <span class="usd-price">/ мес</span></div>
+                    </div>
+                    <div class="pricing-body">
+                        <p class="tariff-tagline">Контент-машина на автопилоте. То, на чём я сделал 2.6 млн просмотров без копейки в рекламу.</p>
+                        <ul class="pricing-features">
+                            <li>Безлимит постов, до 3 каналов</li>
+                            <li>Авторские алгоритмы виральности</li>
+                            <li>Конструктор и планировщик постов</li>
+                            <li>Бесконечный поток идей (в т.ч. из YouTube)</li>
+                            <li>Аналитика: видишь, что реально заходит</li>
+                        </ul>
+                    </div>
+                    <a href="https://smart-posting.ru/join/t1" class="btn-primary full-width">Подключить PRO</a>
+                </div>
+
+                <!-- VIP -->
+                <div class="pricing-card">
+                    <div class="pricing-header">
+                        <h3>VIP</h3>
+                        <div class="price">20 000 ₽ <span class="usd-price">/ мес</span></div>
+                    </div>
+                    <div class="pricing-body">
+                        <p class="tariff-tagline">Всё из PRO — плюс продажи. Система не только пишет контент, но и превращает подписчиков в деньги.</p>
+                        <ul class="pricing-features">
+                            <li>Всё из PRO + до 5 проектов</li>
+                            <li>Своя база подписчиков в одном месте — собираем и ведём твою аудиторию</li>
+                            <li>Авторассылки: система сама пишет и шлёт сообщения базе — прогрев и продажи на автомате</li>
+                            <li>Весь путь клиента как на ладони: от рекламы до оплаты — видно, что приносит деньги</li>
+                            <li>Личная поддержка</li>
+                        </ul>
+                    </div>
+                    <a href="https://smart-posting.ru/join/t2" class="btn-secondary full-width">Подключить VIP</a>
+                </div>
+            </div>
+
+            <p class="prose-text text-center" style="margin-top: 24px; font-size: 14px; color: rgba(255,255,255,0.45);">Не уверен, что подойдёт? Зайди в бесплатный доступ — система сама всё покажет, ни к чему не обязывает.</p>
+        </div>
+    </section>
+
     <!-- FILTER & PRICING -->
     <section id="pricing" class="section">
         <div class="container reveal">
-            <div class="section-label">06 // Призыв</div>
+            <div class="section-label">07 // Призыв</div>
             <h2 class="section-title">The Filter: Для кого эта пушка?</h2>
             
             <div class="prose-text mb-48 text-center" style="max-width: 800px; margin: 0 auto 64px;">
