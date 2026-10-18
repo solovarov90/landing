@@ -2011,3 +2011,29 @@ a {
   }
 }
 
+
+/* Возврат на личный сайт */
+.nav-back {
+  margin: 0 auto 0 20px;
+  font-size: 14px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.6);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color 0.2s ease;
+}
+
+.nav-back:hover {
+  color: #fff;
+}
+
+@media (max-width: 640px) {
+  .nav-back {
+    margin-left: 12px;
+    font-size: 18px;
+  }
+
+  .nav-back-text {
+    display: none;
+  }
+}
